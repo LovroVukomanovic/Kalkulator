@@ -20,7 +20,9 @@ namespace RPACalculator
             InitializeComponent();
         }
 
-       private void NumericValue(object sender, EventArgs e)
+
+
+        private void NumericValue(object sender, EventArgs e)
         {
             Button b = (Button)sender;
 
@@ -38,10 +40,85 @@ namespace RPACalculator
             }
         }
 
+        private void BtnC_Click(object sender, EventArgs e)
+        {
+            txtDisplay.Text = "0";
+        }
+
+        private void BtnCE_Click(object sender, EventArgs e)
+        {
+            txtDisplay.Text = "0";
+
+            String f, s;
+
+            s = Convert.ToString(secondnum);
+            f = Convert.ToString(firstnum);
+
+            s = "";
+            f = "";
+        }
+
+        private void Operational_Function(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            firstnum = Double.Parse(txtDisplay.Text);
+            operation = b.Text;
+            txtDisplay.Text = "";
+        }
+
+        private void BtnBS_Click(object sender, EventArgs e)
+        {
+            if (txtDisplay.Text.Length > 0)
+            {
+                txtDisplay.Text = txtDisplay.Text.Remove(txtDisplay.Text.Length - 1, 1);
+            }
+
+            if (txtDisplay.Text == "")
+            {
+                txtDisplay.Text = "0";
+            }
+        }
+
+        private void BtnPM_Click(object sender, EventArgs e)
+        {
+            if (txtDisplay.Text.Contains("-"))
+            {
+                txtDisplay.Text = txtDisplay.Text.Remove(0, 1);
+            }
+            else
+            {
+                txtDisplay.Text = "-" + txtDisplay.Text;
+            }
+        }
+
+        private void BtnEquals_Click(object sender, EventArgs e)
+        {
+            secondnum = double.Parse(txtDisplay.Text);
+            switch (operation)
+            {
+                case "+":
+                    txtDisplay.Text = Convert.ToString(firstnum + secondnum);
+                    break;
+                case "-":
+                    txtDisplay.Text = Convert.ToString(firstnum - secondnum);
+                    break;
+                case "*":
+                    txtDisplay.Text = Convert.ToString(firstnum * secondnum);
+                    break;
+                case "/":
+                    txtDisplay.Text = Convert.ToString(firstnum / secondnum);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
         private void txtDisplay_TextChanged(object sender, EventArgs e)
         {
              
         }
+
 
     }
 }
